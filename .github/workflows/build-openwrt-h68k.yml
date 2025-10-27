@@ -90,7 +90,7 @@ jobs:
           path: openWRT
         
       - name: 复制当前仓库的配置文件到 openWRT 仓库  (Copy current repo config to openWRT repo)
-        run: cp -f add-openwrt-h68k.patch diffconfig openWRT/
+        run: cp -f add-openwrt-h68k.patch openWRT/
         
       - name: 应用并删除导入h68k设备支持的补丁add-openwrt-h68k.patch
         working-directory: openWRT
@@ -108,6 +108,7 @@ jobs:
         working-directory: openWRT
         run: |
           cp diffconfig .config
+          rm -rf diffconfig
           make defconfig
         
       - name: 下载DI库
