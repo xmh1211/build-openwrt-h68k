@@ -111,7 +111,7 @@ jobs:
           rm -rf diffconfig
           make defconfig
         
-      - name: 下载DI库
+      - name: 下载DL库
         working-directory: openWRT
         run: |
           make download -j1 V=s
