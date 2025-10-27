@@ -232,7 +232,7 @@ index 0000000..f15931e
 +CONFIG_ZSTD_OPTIMIZE_O3=y
 +CONFIG_shadow-all=y
 diff --git a/package/base-files/files/bin/config_generate b/package/base-files/files/bin/config_generate
-index ca40a62..cce2c7d 100755
+index ca40a62..da1c003 100755
 --- a/package/base-files/files/bin/config_generate
 +++ b/package/base-files/files/bin/config_generate
 @@ -162,7 +162,7 @@ generate_network() {
@@ -284,7 +284,7 @@ index 7bb95d3..bc9b09f
    nanopi-r5s-rk3568 \
 diff --git a/package/boot/uboot-rockchip/patches/999-openwrt-24.10-uboot-rockchip-rk3568-Add-support-for-HinLink-H68K.patch b/package/boot/uboot-rockchip/patches/999-openwrt-24.10-uboot-rockchip-rk3568-Add-support-for-HinLink-H68K.patch
 new file mode 100755
-index 0000000..bc6425a
+index 0000000..64d7bf4
 --- /dev/null
 +++ b/package/boot/uboot-rockchip/patches/999-openwrt-24.10-uboot-rockchip-rk3568-Add-support-for-HinLink-H68K.patch
 @@ -0,0 +1,147 @@
