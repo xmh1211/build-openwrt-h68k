@@ -1,4 +1,4 @@
-name: 🚀 编译 immortalwrt(Build immortalwrt)
+name: 🚀 编译 openwrt(Build openwrt)
 
 on:
   workflow_dispatch:
