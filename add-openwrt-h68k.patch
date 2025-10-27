@@ -1,9 +1,9 @@
 diff --git a/diffconfig b/diffconfig
 new file mode 100644
-index 0000000..f15931e
+index 0000000..09d478e
 --- /dev/null
 +++ b/diffconfig
-@@ -0,0 +1,227 @@
+@@ -0,0 +1,232 @@
 +CONFIG_TARGET_rockchip=y
 +CONFIG_TARGET_rockchip_armv8=y
 +CONFIG_TARGET_rockchip_armv8_DEVICE_hinlink_opc-h68k=y
@@ -38,8 +38,11 @@ index 0000000..f15931e
 +CONFIG_PACKAGE_TAR_XATTR=y
 +CONFIG_PACKAGE_TAR_XZ=y
 +CONFIG_PACKAGE_TAR_ZSTD=y
++CONFIG_PACKAGE_block-mount=y
 +CONFIG_PACKAGE_bzip2=y
++CONFIG_PACKAGE_cfdisk=y
 +CONFIG_PACKAGE_cgi-io=y
++CONFIG_PACKAGE_fdisk=y
 +CONFIG_PACKAGE_flock=y
 +CONFIG_PACKAGE_getopt=y
 +CONFIG_PACKAGE_kmod-crypto-authenc=y
@@ -60,6 +63,7 @@ index 0000000..f15931e
 +CONFIG_PACKAGE_libbz2=y
 +CONFIG_PACKAGE_libcap=y
 +CONFIG_PACKAGE_libdbus=y
++CONFIG_PACKAGE_libfdisk=y
 +CONFIG_PACKAGE_libffi=y
 +CONFIG_PACKAGE_libgdbm=y
 +CONFIG_PACKAGE_libgmp=y
@@ -70,6 +74,7 @@ index 0000000..f15931e
 +CONFIG_PACKAGE_liblucihttp-ucode=y
 +CONFIG_PACKAGE_liblxc=y
 +CONFIG_PACKAGE_liblzma=y
++CONFIG_PACKAGE_libmount=y
 +CONFIG_PACKAGE_libncurses=y
 +CONFIG_PACKAGE_libnettle=y
 +CONFIG_PACKAGE_libpcre2=y
@@ -226,8 +231,8 @@ index 0000000..f15931e
 +CONFIG_SQLITE3_FTS4=y
 +CONFIG_SQLITE3_FTS5=y
 +CONFIG_SQLITE3_RTREE=y
-+CONFIG_TARGET_KERNEL_PARTSIZE=512
-+CONFIG_TARGET_ROOTFS_PARTSIZE=2048
++CONFIG_TARGET_KERNEL_PARTSIZE=50
++CONFIG_TARGET_ROOTFS_PARTSIZE=500
 +CONFIG_TARGET_ROOTFS_TARGZ=y
 +CONFIG_ZSTD_OPTIMIZE_O3=y
 +CONFIG_shadow-all=y
@@ -284,10 +289,10 @@ index 7bb95d3..bc9b09f
    nanopi-r5s-rk3568 \
 diff --git a/package/boot/uboot-rockchip/patches/999-openwrt-24.10-uboot-rockchip-rk3568-Add-support-for-HinLink-H68K.patch b/package/boot/uboot-rockchip/patches/999-openwrt-24.10-uboot-rockchip-rk3568-Add-support-for-HinLink-H68K.patch
 new file mode 100755
-index 0000000..64d7bf4
+index 0000000..440b6b5
 --- /dev/null
 +++ b/package/boot/uboot-rockchip/patches/999-openwrt-24.10-uboot-rockchip-rk3568-Add-support-for-HinLink-H68K.patch
-@@ -0,0 +1,147 @@
+@@ -0,0 +1,145 @@
 +--- /dev/null
 ++++ b/arch/arm/dts/rk3568-opc-h68k-u-boot.dtsi
 +@@ -0,0 +1,3 @@
@@ -364,7 +369,7 @@ index 0000000..64d7bf4
 ++};
 +--- /dev/null
 ++++ b/configs/opc-h68k-rk3568_defconfig
-+@@ -0,0 +1,70 @@
++@@ -0,0 +1,68 @@
 ++CONFIG_ARM=y
 ++CONFIG_SKIP_LOWLEVEL_INIT=y
 ++CONFIG_COUNTER_FREQUENCY=24000000
@@ -373,9 +378,9 @@ index 0000000..64d7bf4
 ++CONFIG_DEFAULT_DEVICE_TREE="rk3568-opc-h68k"
 ++CONFIG_ROCKCHIP_RK3568=y
 ++CONFIG_SPL_SERIAL=y
-++CONFIG_SYS_LOAD_ADDR=0xc00800
 ++CONFIG_DEBUG_UART_BASE=0xFE660000
 ++CONFIG_DEBUG_UART_CLOCK=24000000
+++CONFIG_SYS_LOAD_ADDR=0xc00800
 ++CONFIG_DEBUG_UART=y
 ++CONFIG_FIT=y
 ++CONFIG_FIT_VERBOSE=y
@@ -385,26 +390,24 @@ index 0000000..64d7bf4
 ++CONFIG_LEGACY_IMAGE_FORMAT=y
 ++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-opc-h68k.dtb"
 ++# CONFIG_DISPLAY_CPUINFO is not set
+++CONFIG_DISPLAY_BOARDINFO_LATE=y
 ++CONFIG_SPL_MAX_SIZE=0x40000
+++CONFIG_SPL_PAD_TO=0x7f8000
 ++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 ++CONFIG_SPL_ATF=y
-++CONFIG_CMD_MEMINFO=y
-++CONFIG_CMD_MEMINFO_MAP=y
 ++CONFIG_CMD_GPIO=y
 ++CONFIG_CMD_GPT=y
-++CONFIG_CMD_MISC=y
 ++CONFIG_CMD_MMC=y
 ++CONFIG_CMD_ROCKUSB=y
 ++CONFIG_CMD_USB_MASS_STORAGE=y
 ++# CONFIG_CMD_SETEXPR is not set
-++CONFIG_CMD_RNG=y
 ++# CONFIG_SPL_DOS_PARTITION is not set
 ++CONFIG_SPL_OF_CONTROL=y
 ++CONFIG_OF_LIVE=y
 ++# CONFIG_OF_UPSTREAM is not set
 ++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-++CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-++CONFIG_NO_NET=y
+++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+++# CONFIG_NET is not set
 ++CONFIG_SPL_DM_SEQ_ALIAS=y
 ++CONFIG_SPL_REGMAP=y
 ++CONFIG_SPL_SYSCON=y
